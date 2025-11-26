@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The King (Mukesh) – Official Channel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0f1724; --gold:#d4b253; --muted:#9aa4b2;
+    }
+    body{
+      margin:0; background:#071021; font-family:'Poppins',sans-serif; color:white;
+      background:url('stadium-bg.jpg'); background-size:cover; background-position:center;
+    }
+    .wrapper{padding:18px; max-width:480px; margin:auto;}
+    .card{
+      background:rgba(0,0,0,0.55); padding:18px; border-radius:18px;
+      backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.08);
+    }
+    .avatar-wrap{text-align:center; margin-top:12px;}
+    .avatar{
+      width:150px; height:150px; border-radius:50%; object-fit:cover;
+      border:5px solid rgba(212,178,83,0.6); box-shadow:0 4px 18px rgba(0,0,0,0.6);
+    }
+    h1{
+      text-align:center; font-weight:700; margin:10px 0 4px 0; font-size:26px; color:var(--gold);
+    }
+    .subtitle{text-align:center; font-size:14px; color:#d6dde8;}
+    .pill-row{margin-top:14px; display:flex; gap:6px; flex-wrap:wrap; justify-content:center;}
+    .pill{
+      background:rgba(255,255,255,0.06); padding:6px 12px; font-size:12px; border-radius:999px;
+      border:1px solid rgba(255,255,255,0.1);
+    }
+    .timer-box{
+      margin:20px auto; background:rgba(255,255,255,0.08);
+      width:160px; text-align:center; padding:10px; border-radius:12px;
+    }
+    #timer{font-size:22px; font-weight:700;}
+    .cta{
+      display:block; text-align:center; background:linear-gradient(90deg,var(--gold),#f0d87a);
+      padding:14px; border-radius:12px; font-weight:700; text-decoration:none; color:#071021;
+      margin-top:16px; box-shadow:0 8px 25px rgba(212,178,83,0.25);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="card">
+
+      <div class="avatar-wrap">
+        <img src="dp.jpg" class="avatar">
+      </div>
+
+      <h1>The King (Mukesh)</h1>
+      <p class="subtitle">Elite cricket calls • Professional pre-match breakdowns</p>
+
+      <div class="pill-row">
+        <div class="pill">Gold-standard Analysis</div>
+        <div class="pill">Discipline Control</div>
+        <div class="pill">Premium Access</div>
+      </div>
+
+      <div class="timer-box">
+        <div id="timer">00:49</div>
+      </div>
+
+      <a href="https://t.me/+kHfo5fFfaNdkY2E1" class="cta" id="btnJoin">Join The King (Mukesh)</a>
+
+    </div>
+  </div>
+
+<script>
+let t = 49;
+function runTimer(){
+  let m = String(Math.floor(t/60)).padStart(2,'0');
+  let s = String(t%60).padStart(2,'0');
+  document.getElementById("timer").textContent = m + ":" + s;
+  if(t <= 0) return;
+  t--;
+  setTimeout(runTimer,1000);
+}
+runTimer();
+</script>
+
+</body>
+</html>
