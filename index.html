@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The KIng — Landing</title>
+  <style>
+    /* Premium dark glossy theme + stadium spotlight + animated gradient */
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Poppins',system-ui,Arial,sans-serif}
+    html,body{height:100%}
+    body{
+      background:#000;
+      display:flex;align-items:center;justify-content:center;padding:36px;color:#fff;
+      perspective:1000px; /* for 3D avatar tilt */
+      overflow:hidden;
+      background-image:linear-gradient(rgba(0,10,20,0.72), rgba(0,0,0,0.88)), url('lion.jpg');
+      background-size:cover;
+      background-position:center;
+      background-attachment:fixed;
+    }
+
+    /* animated stadium lights in background */
+    body::before{
+      content:"";position:fixed;inset:-20% -20% auto -20%;height:140%;background:
+        radial-gradient(ellipse at 20% 10%, rgba(255,255,255,0.06) 0%, transparent 12%),
+        radial-gradient(ellipse at 80% 10%, rgba(255,255,255,0.05) 0%, transparent 12%),
+        linear-gradient(180deg, rgba(10,20,30,0.6), rgba(0,0,0,0.9));
+      filter:blur(40px);transform:translateZ(-200px) scale(1.25);
+      animation:bgShift 8s ease-in-out infinite alternate;z-index:0;pointer-events:none;
+    }
+    @keyframes bgShift{from{transform:translate3d(-2%,0, -200px) scale(1.2)}to{transform:translate3d(2%,-6%, -240px) scale(1.3)}}
+
+    /* subtle moving spotlight beams */
+    .spotlight{position:fixed;left:50%;top:-10%;width:140vmax;height:80vmax;transform:translateX(-50%);pointer-events:none;mix-blend-mode:screen;opacity:0.28}
+    .spotlight:before,.spotlight:after{content:"";position:absolute;left:50%;transform:translateX(-50%);width:60vmax;height:60vmax;border-radius:50%;background:radial-gradient(circle at 50% 20%, rgba(255,240,200,0.18), rgba(255,200,120,0.06) 20%, transparent 40%);filter:blur(40px)}
+    .spotlight:after{top:10%;left:35%;width:70vmax;height:70vmax;background:radial-gradient(circle at 20% 20%, rgba(120,200,255,0.12), transparent 35%);opacity:0.9}
+
+    .card{position:relative;z-index:5;width:420px;max-width:94vw;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));border-radius:26px;padding:36px 28px;backdrop-filter:blur(8px);box-shadow:0 20px 60px rgba(6,20,30,0.8);border:1px solid rgba(255,255,255,0.04);overflow:visible}
+
+    /* glossy top bar accent */
+    .card::before{content:"";position:absolute;left:0;right:0;top:0;height:8px;border-radius:26px 26px 0 0;background:linear-gradient(90deg,#ffd54a,#ff8a00);opacity:0.07}
+
+    /* Avatar 3D depth container */
+    .avatar-wrap{display:flex;align-items:center;justify-content:center;margin-top:-60px;margin-bottom:8px;position:relative;transform-style:preserve-3d}
+    .avatar{
+      width:130px;height:130px;border-radius:50%;background:linear-gradient(180deg,#0b0b0b,#111);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;text-transform:uppercase;position:relative;overflow:visible;transform:translateZ(40px);
+      box-shadow:0 20px 60px rgba(0,0,0,0.8), 0 6px 30px rgba(0,200,180,0.06) inset;
+      border:6px solid rgba(255,255,255,0.06);
+    }
+
+    /* layered depth rings behind avatar */
+    .avatar .depth-ring{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:220px;height:220px;border-radius:50%;pointer-events:none}
+    .avatar .depth-ring svg{width:100%;height:100%;filter:blur(8px);opacity:0.55}
+
+    /* subtle tilt effect on hover */
+    .card:hover .avatar{transform:rotateX(12deg) rotateY(-8deg) translateZ(50px);transition:transform 450ms cubic-bezier(.2,.9,.2,1)}
+
+    /* holographic shimmer on avatar foreground */
+    .avatar::after{
+      content:"";position:absolute;left:-20%;top:-10%;width:160%;height:120%;background:linear-gradient(120deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.14) 2%, rgba(255,255,255,0.02) 4%, transparent 30%);
+      transform:skewX(-18deg);filter:blur(8px);opacity:0.6;animation:shimmer 3s infinite linear;mix-blend-mode:overlay
+    }
+    @keyframes shimmer{0%{transform:translateX(-120%) skewX(-18deg)}100%{transform:translateX(120%) skewX(-18deg)}}
+
+    /* The King logo: golden signature style */
+    .logo{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:6px}
+    .logo svg{height:44px;width:auto;filter:drop-shadow(0 6px 18px rgba(255,190,30,0.14))}
+    .logo .subtitle{font-size:12px;color:rgba(255,255,255,0.6);letter-spacing:0.6px}
+
+    .tagline{font-size:13px;color:rgba(255,255,255,0.92);margin-bottom:10px}
+
+    .timer{font-size:48px;font-weight:800;color:#7ef3c8;text-shadow:0 0 20px rgba(94,255,200,0.08);margin-bottom:14px}
+    .timer small{font-size:12px;color:rgba(255,255,255,0.42);display:block;margin-top:6px}
+
+    .cta{display:inline-block;padding:14px 26px;border-radius:40px;background:linear-gradient(90deg,#ffb84d,#ffd54a,#ff9a00);color:#08121a;font-weight:800;text-decoration:none;box-shadow:0 18px 50px rgba(255,165,45,0.12);transition:transform .18s ease}
+    .cta:hover{transform:translateY(-4px)}
+
+    .bottom{margin-top:18px;display:flex;flex-direction:column;align-items:center;gap:8px}
+    .pulse{font-size:13px;color:#fff;background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));padding:10px 20px;border-radius:999px;box-shadow:0 8px 30px rgba(0,0,0,0.6)}
+    .disclaimer{font-size:11px;color:rgba(255,255,255,0.12);max-width:86%;text-align:center}
+
+    /* --- Lion background cinematic blur + spotlight focus --- */
+
+    /* Full-screen blurred lion layer */
+    .lion-blur-bg{
+      position:fixed;inset:0;
+      background:url('lion.jpg') center/cover no-repeat;
+      filter:blur(18px) brightness(0.65) contrast(1.1);
+      transform:scale(1.12);
+      z-index:-3;
+    }
+
+    /* Spotlight circle (focused highlight on center area) */
+    .lion-spotlight{
+      position:fixed;inset:0;
+      background:radial-gradient(circle at center,
+        rgba(255,255,255,0.18) 0%,
+        rgba(255,255,255,0.04) 22%,
+        rgba(0,0,0,0.82) 60%,
+        rgba(0,0,0,0.95) 100%);
+      mix-blend-mode:screen;
+      pointer-events:none;
+      z-index:-1;
+      animation:spotGlow 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes spotGlow{
+      0%{opacity:0.35;transform:scale(1)}
+      100%{opacity:0.52;transform:scale(1.05)}
+    }
+
+    /* responsive tweaks */
+    @media (max-width:460px){.card{padding:26px}.avatar{width:110px;height:110px}}
+  </style>
+</head>
+<body>
+  <div class="lion-blur-bg"></div>
+  <div class="lion-spotlight"></div>
+  <div class="spotlight" aria-hidden="true"></div>
+  <div class="card" role="region" aria-label="The KIng channel landing">
+
+    <div class="avatar-wrap" aria-hidden="true">
+      <div class="avatar" id="avatar">
+        <div class="depth-ring" aria-hidden="true">
+          <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#ffd54a" stop-opacity="0.95"/><stop offset="1" stop-color="#ff7a18" stop-opacity="0.06"/></linearGradient></defs><circle cx="110" cy="110" r="86" fill="none" stroke="url(#g1)" stroke-width="4" stroke-dasharray="8 12"/></svg>
+        </div>
+        <!-- default text; replaced if profile.jpg is present -->
+        <span style="pointer-events:none;font-size:16px;letter-spacing:1px">THE KING</span>
+      </div>
+    </div>
+
+    <!-- signature golden logo SVG -->
+    <div class="logo" aria-hidden="false">
+      <svg viewBox="0 0 420 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The King logo"><defs>
+        <linearGradient id="gold" x1="0" x2="1"><stop offset="0" stop-color="#ffd86b"/><stop offset="0.5" stop-color="#ffb347"/><stop offset="1" stop-color="#d99a2b"/></linearGradient>
+        <filter id="shine"><feGaussianBlur in="SourceGraphic" stdDeviation="0.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <g filter="url(#shine)">
+        <path d="M18 86c18-36 58-60 110-58 36 1 68 18 108 8 22-6 44-28 64-18 12 6 6 28-8 40-20 18-44 28-70 28-36 0-70-12-104-18-24-4-48 0-58 18" fill="url(#gold)" opacity="0.98"/>
+        <text x="20" y="110" font-family="'Poppins',sans-serif" font-size="20" fill="#ffe9b8" opacity="0.9">The KIng</text>
+      </g>
+      </svg>
+      <div class="subtitle">Cricket • Insights • Updates</div>
+    </div>
+
+    <div class="tagline">Cricket updates, analysis, and insights for fans</div>
+
+    <div class="timer" id="timer">0:60
+      <small id="timer-label">Seconds Left</small>
+    </div>
+
+    <a class="cta" href="https://t.me/+kHfo5fFfaNdkY2E1" id="join-btn" target="_blank" rel="noopener">JOIN THE CHANNEL NOW</a>
+
+    <div class="bottom">
+      <div class="pulse">Sharing expertise as a dedicated cricket analyst</div>
+      <div class="disclaimer">This is an independent fan channel — follow for updates</div>
+    </div>
+  </div>
+
+  <script>
+    // Countdown from 60s
+    (function(){
+      var sec = 60;
+      var el = document.getElementById('timer');
+      var label = document.getElementById('timer-label');
+      function upd(){
+        var mm = Math.floor(sec/60);
+        var ss = sec%60;
+        el.firstChild.nodeValue = mm+\":\"+(ss<10?\"0\":\"\")+ss;
+        if(sec<=0){clearInterval(t);label.textContent='Join now';}
+        sec--;
+      }
+      upd();
+      var t = setInterval(upd,1000);
+    })();
+
+    // try to load a profile image named profile.jpg if present
+    (function(){
+      var avatar = document.getElementById('avatar');
+      var img = new Image(); img.src='profile.jpg';
+      img.onload = function(){ img.style.width='100%'; img.style.height='100%'; img.style.objectFit='cover'; img.style.display='block'; avatar.innerHTML=''; avatar.appendChild(img); }
+      img.onerror = function(){ /* keep text fallback */ }
+    })();
+  </script>
+</body>
+</html>
